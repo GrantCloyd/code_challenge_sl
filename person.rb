@@ -1,15 +1,13 @@
-
 require 'date'
 
 class Person 
    attr_reader :last_name, :first_name, :gender, :date_of_birth, :color
     
+  @@all = []
 
- @@all = []
-
- def self.all
-   @@all
- end
+  def self.all
+    @@all
+  end
 
   def initialize(last_name, first_name, gender, date_of_birth, color)
     @last_name = last_name
@@ -20,7 +18,7 @@ class Person
   end 
   
   def stringify_instance
-  "#{@last_name} #{@first_name} #{@gender} #{@date_of_birth} #{@color}"
+    "#{@last_name} #{@first_name} #{@gender} #{@date_of_birth} #{@color}"
   end
   
   def self.create_with_string(str_params)
@@ -50,8 +48,6 @@ class Person
   end
 
 
- 
-
   private
 
   def self.sanitize(str_params)  
@@ -70,37 +66,35 @@ class Person
   end
 
   def self.output(data_arr)
-    data_arr.each {|person| p person.stringify_instance}
+    data_arr.collect {|person| p person.stringify_instance }.join("\n")
   end
 
 
 end
 
-#Space
-Person.create_with_string("Kournikova Anna F F 6-3-1975 Red")
-    Person.create_with_string("Hingis Martina M F 4-2-1979 Green")
-        Person.create_with_string("Seles Monica H F 12-2-1973 Black")
-#Comma
-Person.create_with_string("Abercrombie, Neil, Male, Tan, 2/13/1943")
-    Person.create_with_string("Bishop, Timothy, Male, Yellow, 4/23/1967")
-        Person.create_with_string("Kelly, Sue, Female, Pink, 7/12/1959")
-#Pipe
-Person.create_with_string("Smith | Steve | D | M | Red | 3-3-1985")
-    Person.create_with_string("Bonk | Radek | S | M | Green | 6-3-1975")
-        Person.create_with_string("Bouillon | Francis | G | M | Blue | 6-3-1975")
-#Error
-p Person.create_with_string("Smith Steve Sad Lion ")
-    p   Person.create_with_string({name: "Bob"})
 
 
-p Person.all
+# ---
+# #Space
+# Person.create_with_string("Kournikova Anna F F 6-3-1975 Red")
+#     Person.create_with_string("Hingis Martina M F 4-2-1979 Green")
+#         Person.create_with_string("Seles Monica H F 12-2-1973 Black")
+# #Comma
+# Person.create_with_string("Abercrombie, Neil, Male, Tan, 2/13/1943")
+#     Person.create_with_string("Bishop, Timothy, Male, Yellow, 4/23/1967")
+#         Person.create_with_string("Kelly, Sue, Female, Pink, 7/12/1959")
+# #Pipe
+# Person.create_with_string("Smith | Steve | D | M | Red | 3-3-1985")
+#     Person.create_with_string("Bonk | Radek | S | M | Green | 6-3-1975")
+#         Person.create_with_string("Bouillon | Francis | G | M | Blue | 6-3-1975")
 
-print "\n"
-p "Output 1" 
-Person.sort_by_gender_and_last_name
-print "\n"
-p "Output 2"
-Person.sort_by_date_of_birth_and_last_name
-print "\n"
-p "Output 3"
-Person.sort_by_last_name_desc
+
+# print "\n"
+#  p "Output 1" 
+# p Person.sort_by_gender_and_last_name
+# print "\n"
+# p "Output 2"
+# Person.sort_by_date_of_birth_and_last_name
+# print "\n"
+# p "Output 3"
+# Person.sort_by_last_name_desc
