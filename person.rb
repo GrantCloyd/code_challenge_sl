@@ -1,5 +1,6 @@
 require 'date'
 
+
 class Person 
    attr_reader :last_name, :first_name, :gender, :date_of_birth, :color
     
@@ -17,6 +18,13 @@ class Person
     @color = color
   end 
   
+  def self.create_from_file_data(file)
+     data = file.read.split("\n")
+     data.each {|line| self.create_with_string(line)}
+    rescue NoMethodError => error
+      return  "Undefined method 'read' - ensure input is a file"
+  end
+
 
   def self.create_with_string(str_params)
     if str_params.class != String then return "Please provide a string" end  

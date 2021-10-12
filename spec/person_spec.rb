@@ -1,22 +1,50 @@
+# files for creation and testing
+space_file = File.open("input-files/space-style.txt")
+pipe_file = File.open("input-files/pipe-style.txt")
+comma_file = File.open("input-files/comma-style.txt")
 
- #Space
-    Person.create_with_string("Hingis Martina M F 4-2-1979 Green")
-        Person.create_with_string("Seles Monica H F 12-2-1973 Black")
-#Comma
-    Person.create_with_string("Bishop, Timothy, Male, Yellow, 4/23/1967")
-        Person.create_with_string("Kelly, Sue, Female, Pink, 7/12/1959")
-#Pipe
-    Person.create_with_string("Bonk | Radek | S | M | Green | 6-3-1975")
-        Person.create_with_string("Bouillon | Francis | G | M | Blue | 6-3-1975")
+
+
+#Space text parse
+  Person.create_from_file_data(space_file)
+#Comma text parse
+  Person.create_from_file_data(comma_file)
+
+
+describe 'Person #create_with_file:' do 
+  it 'Takes a raw text file and creates one person instance per line of data.' do
+#Pipe text parse
+    Person.create_from_file_data(pipe_file)
+    
+    person1 = Person.all.find{|p| p.last_name == "Bouillon"}
+    person2 = Person.all.find{|p| p.first_name == "Radek"}
+    person3 = Person.all.find{|p| p.date_of_birth == "3/3/1985"}
+    expect(Person.all).to include(person1, person2, person3)
+  end
+end
+
+describe 'Person #create_from_file_data error handling:' do
+    it 'Handles if the passed item cannot respond to #read.' do
+        not_file1  = ""
+        not_file2 = []
+        error1 = Person.create_from_file_data(not_file1)
+        error2 = Person.create_from_file_data(not_file2)
+        #Error case
+
+        expect(error1).to eq("Undefined method 'read' - ensure input is a file")
+        expect(error2).to eq("Undefined method 'read' - ensure input is a file")
+    end
+end
+
 
 describe 'Person #create_with_string:' do
-    it 'Takes a string that is formatted in the space, comma, or pipe style.' do
-        person1 = Person.create_with_string("Kournikova Anna F F 6-3-1975 Red")
-        person2 = Person.create_with_string("Abercrombie, Neil, Male, Tan, 2/13/1943")
-        person3 = Person.create_with_string("Smith | Steve | D | M | Red | 3-3-1985")
-        expect(Person.all).to include(person1, person2, person3)
-        
-    end
+  it 'Takes a string that is formatted in the space, comma, or pipe style and creates a person instance.' do
+    person1 = Person.create_with_string("Kournikova Anna F F 6-3-1975 Red")
+    person2 = Person.create_with_string("Abercrombie, Neil, Male, Tan, 2/13/1943")
+    person3 = Person.create_with_string("Smith | Steve | D | M | Red | 3-3-1985")
+    expect(Person.all).to include(person1, person2, person3)
+    3.times {Person.all.pop}
+  end
 end
 
 describe 'Person #create_with_string error handling:' do
