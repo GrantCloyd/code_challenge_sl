@@ -38,8 +38,8 @@ class Person
   end
 
   def self.output_file
-    file = File.new("output-file/output.txt", "w+") 
-    File.write("output-file/output.txt", self.write_data.join("\n"))  
+    file = File.new("output.txt", "w+") 
+    File.write("output.txt", self.write_data.join("\n"))  
     file.close
   end
 
