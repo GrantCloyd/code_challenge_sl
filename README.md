@@ -9,7 +9,7 @@ Created based on specifications for the SmartLogic code challenge.
 - Bundler: -v 2.2.4
 
 ## Getting started
-To download and run the program, use the following commands:
+To download and set-up the program, use the following commands:
 
 ```
 git clone https://github.com/GrantCloyd/code_challenge_sl.git
@@ -24,4 +24,10 @@ Bundle complete! 1 Gemfile dependency, 7 gems now installed.
 Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
 
-If not, make sure your bundler is up to date. See this [site](https://bundler.io/) for more information 
+If not, make sure your bundler is up to date. See this [site](https://bundler.io/) for more information
+
+## Running the program
+
+To run the program type `rspec` while in the code_challenge_sl root directory. This will print the sorted order of the input-files, run 7 rspec tests, and generate a file in the root directory called `output.txt`.  
+
+You can open the newly created file from the command line on mac using `open output.txt` or print it directly to the console using `cat output.txt`.
